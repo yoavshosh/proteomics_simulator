@@ -264,11 +264,11 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, description='Analysis of MaxQuant proteomics results wrt peptides from proteomics simulation')
     run_parser = parser.add_argument_group('Run Analysis')
-    run_parser.add_argument('-samples_list', dest='sampels_list', action='store', required = True, help='Path to file with list of samples and their data (fields: samples_name, sample_sub_name, quantification_method, tissue, path_to_raw_files_where_results_dir_is')
+    run_parser.add_argument('-samples_list', dest='sampels_list', action='store', required = True, help='Path to file with list of samples and their data (fields: samples_name, sample_sub_name, quantification_method, tissue, phosphoproteom(True/False) path_to_raw_files_dir, notes1, notes2')
     run_parser.add_argument('-peptides', dest='peptides', action='store', required = True, help='path to edited peptides and their native versions from proteomics simulator')
     run_parser.add_argument('-sites', dest='sites', action='store', required = True, help='path to editing sites list used in proteomics simulation')
     run_parser.add_argument('-combined_output_dir_name', dest='combined_output_dir_name', action='store', default = 'combined', help='in raw files paths in samples list - the sub path in which MQ peptides results resides')
-    run_parser.add_argument('-n_workers', dest='n_workers', action='store', default = '30', help='number of chiled processes for mq results analysis')
+    run_parser.add_argument('-threads', dest='n_workers', action='store', default = '30', help='number of chiled processes for mq results analysis')
     run_parser.add_argument('-o', dest='output_suffix', action='store', default = datetime.datetime.now().strftime("%Y%m%d%H%M%S"), help='output suffix for output files')
     arguments = parser.parse_args()
     

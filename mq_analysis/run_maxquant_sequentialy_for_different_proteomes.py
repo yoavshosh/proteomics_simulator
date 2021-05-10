@@ -22,7 +22,7 @@ if __name__ == '__main__':
     run_parser.add_argument('-min_aa', dest='min_pep_len', action='store', default = '7', help='Minimal number of amino acids per peptide')
     run_parser.add_argument('-max_mass', dest='max_pep_mass', action='store', default = '4600', help='Maximal peptides mass')
     run_parser.add_argument('-max_mc', dest='max_mc', action='store', default = '2', help='maximal number of missed cleavages per peptide')
-    run_parser.add_argument('-quantification', dest='quantification', action='store', default = 'lfq', help='quantification method used in MS/MS')
+    run_parser.add_argument('-quantification', dest='quantification', action='store', default = 'lfq', help='quantification method used in MS/MS. lfq/itraq/tmt are supported')
     run_parser.add_argument('-phospho', dest='phospho', action='store', default = 'False', help='raw files are of phosphoproteomics')
     run_parser.add_argument('-enz', dest='enzymes', action='store', nargs='+', default = ['trypsin'], help='enzymes used for cleavage for peptides search. type unspecific for unspecific')
     run_parser.add_argument('-o', dest='output_names', action='store', default = 'ag_editings non_ag_editings random_ag_editings', help='names seperated by spaces: mqpar/log files/combined directory (MQ output) names for each proteom run. should be a list of size equal to number of proteoms passed. each name will be assigned to each proteom respectively')
