@@ -40,7 +40,7 @@ Command for running the simulator.
 `python proteomics_simulator_full_pipline.py -i_fasta <input_mRNAs> -i_sites <editing_sites_file> -mc 3 -min_aa 6 -max_m 5200`
 
 
-This command uses many modules in a few stages. you can use them separately if you want by running the pipeline yourself (see proteomics_simulator_full_pipline.py).
+This command uses many modules in a few stages. you can use them separately if you want to run the pipline stage by stage yourself (see proteomics_simulator_full_pipline.py).
 
 Basically, it creates a data-base of all the possible peptides that are created from a proteomics procedure with proteins defined from the mRNA coding sequences in the 
 `<input_mRNAs>` fasta file and their edited versions inferred from the editing_sites_file.
