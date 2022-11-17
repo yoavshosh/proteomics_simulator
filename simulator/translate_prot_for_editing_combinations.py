@@ -34,6 +34,8 @@ def create_proteins_for_each_peptide(input_path, fasta_input, output_path, final
         
     for key, mrna_sequence, in sequences_dict.items():
         
+        written_versions = []
+        
         #first print the native protein
         comb_id = key + '|original'
         protein = mrna_sequence.translate()
