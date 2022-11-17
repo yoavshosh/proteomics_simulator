@@ -40,6 +40,7 @@ def create_proteins_for_each_peptide(input_path, fasta_input, output_path, final
         comb_id = key + '|original'
         protein = mrna_sequence.translate()
         writer.write_record(SeqRecord(protein, id = comb_id, description = ''))
+        written_versions.append(str(protein))
         
         edited_peptides = final_edited_peptides[final_edited_peptides['seq_id'] == key]
         
@@ -49,15 +50,18 @@ def create_proteins_for_each_peptide(input_path, fasta_input, output_path, final
             #flag editing combination for print\dont print in proteins file
             edit_prot = True
             if not allow_change_in_cleavage_sites and edit_prot:
-                if final_peps_df.loc[index,'N_terminus'] != 'no_change' or final_peps_df.loc[index,'C_terminus'] != 'no_change' or final_peps_df.loc[index,'cancelled_cs_in_pep']:
+                if final_peptides.loc[index,'N_terminus'] != 'no_change' or final_peptides.loc[index,'C_terminus'] != 'no_change' or final_peptides.loc[index,'cancelled_cs_in_pep']:
                     edit_prot = False
                 
             if edit_prot:
                 permutation_coor = tuple(int(x) for x in row['permutation_coor_base0'].split('_') if x != '')
-                protein = mrna_sequence[:permutation_coor[0]].translate() + row['biological_extended_peptide'] + mrna_sequence[permutation_coor[1]+1:]
-                comb_id = key + '|edited_'+str(n) + '\t' + str(row['editing_combinations_relative_to_coding_seq_base0'])
-                writer.write_record(SeqRecord(protein, id = comb_id, description = ''))
-                n+=1
+                protein = mrna_sequence[:permutation_coor[0]].translate() + row['biological_extended_peptide'] + mrna_sequence[permutation_coor[1]+1:].translate()
+                if str(protein) not in written_versions:
+                    comb_id = key + '|edited_'+str(n) + '\t' + str(row['editing_combinations_relative_to_coding_seq_base0'])
+                    writer.write_record(SeqRecord(protein, id = comb_id, description = ''))
+                    n+=1
+                    written_versions.append(str(protein))
+                    
     
     writer.write_footer()
         
